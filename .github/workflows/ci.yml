@@ -8,7 +8,8 @@ on:
   pull_request:
     branches:
       - main
-
+  # Agrega esto para permitir la ejecución manual
+  workflow_dispatch:
 jobs:
   test:
     runs-on: ubuntu-latest
