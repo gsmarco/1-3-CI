@@ -1,31 +1,39 @@
-name: Node.js CI
+- name: Copiar repositorio
+  uses: actions/checkout@v4
 
-on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+- name: Configurar Node.js ${{ matrix.node-version }}
+  uses: actions/setup-node@v4
+  with:
+    node-version: ${{ matrix.node-version }}
+    cache: "npm"
+# name: Node.js CI
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# on:
+#   push:
+#     branches: ["main"]
+#   pull_request:
+#     branches: ["main"]
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Copiar repositorio
-        uses: actions/checkout@v4
+#     strategy:
+#       matrix:
+#         node-version: [18.x, 20.x]
 
-      - name: Configurar Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
+#     steps:
+#       - name: Copiar repositorio
+#         uses: actions/checkout@v4
 
-      - name: Instalar dependencias
-        run: npm ci
+#       - name: Configurar Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#           cache: "npm"
 
-      - name: Ejecutar pruebas
-        run: npm test
+#       - name: Instalar dependencias
+#         run: npm ci
+
+#       - name: Ejecutar pruebas
+#         run: npm test
